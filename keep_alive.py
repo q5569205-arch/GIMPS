@@ -1,6 +1,12 @@
-from flask import Flask, render_template
 from threading import Thread
+import subprocess
 
+try:
+  from flask import Flask, render_template
+except:
+  subprocess.run(["pip","install","flask"])
+  from flask import Flask, render_template
+  
 app = Flask(__name__)
 
 
