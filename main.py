@@ -1,21 +1,23 @@
 import subprocess
 import time
+import uuid
 
 from keep_alive import keep_alive
 
 keep_alive()
 
 if not os.path.isfile("./prime.txt"):
+  guid = uuid.uuid1()
   with open("./prime.txt", mode="w") as f:
     f.write('''
 NumWorkers=1
 WorkPreference=0
 CoresPerTest=4
-ComputerGUID=d2ceb3db83e211c4c7f64ca034dff8e2
+ComputerGUID={}
 StressTester=0
 UsePrimenet=1
 V5UserID=t112358f
-ComputerID=replit_ta.fu.0804_1
+ComputerID=replit
 WorkerDiskSpace=6
 ProofResiduesDir=
 ProofArchiveDir=
@@ -63,7 +65,7 @@ UploadRateLimit=1
 UploadStartTime=00:00
 UploadEndTime=24:00
 DownloadDailyLimit=40
-    ''')
+    '''.format(guid))
 
 subprocess.run(["chmod", "777", "./mprime"])
 p = subprocess.Popen(["./mprime", "-m"], stdin=subprocess.PIPE)
